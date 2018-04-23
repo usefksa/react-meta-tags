@@ -90,13 +90,17 @@ export function getDuplicateTitle() {
 
 export function getDuplicateMeta(meta) {
   const head = document.head;
-  const {id, property, name} = meta;
+  const { id, property, name, rel } = meta;
   if (id) {
     return id && head.querySelector(`#${id}`);
   } else if (name) {
     return filterOutMetaWithId(head.querySelectorAll(`[name = "${name}"]`));
   } else if (property) {
-    return filterOutMetaWithId(head.querySelectorAll(`[property = "${property}"]`));
+    return filterOutMetaWithId(
+      head.querySelectorAll(`[property = "${property}"]`)
+    );
+  } else if (rel) {
+    return filterOutMetaWithId(head.querySelectorAll(`[rel = "${rel}"]`));
   }
 
   return null;
